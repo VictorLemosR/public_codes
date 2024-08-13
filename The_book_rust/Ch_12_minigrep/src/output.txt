@@ -1,0 +1,6 @@
+Searching for How
+In file poem.txt
+
+["How dreary to be somebody!", "How public, like a frog"]
+How dreary to be somebody!
+How public, like a frog
