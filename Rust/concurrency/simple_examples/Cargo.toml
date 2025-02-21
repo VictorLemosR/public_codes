@@ -1,0 +1,10 @@
+[package]
+name = "simple_examples"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+futures = "0.3.31"
+tokio = { version = "1.43.0", features = ["full"] }
+anyhow = "1.0.95"
+reqwest = "0.12.12"

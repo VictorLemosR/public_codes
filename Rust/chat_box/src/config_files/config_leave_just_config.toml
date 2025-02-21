@@ -1,0 +1,9 @@
+name = "ChatBot"
+model = "gpt-4o-mini"
+secret_key = "Put your secret key here"
+
+[[file_bundles]]
+bundle_name = "transcripts"
+src_dir = "Transcripts"
+src_globs = ["**/*.pdf"]
+dst_ext = "pdf"

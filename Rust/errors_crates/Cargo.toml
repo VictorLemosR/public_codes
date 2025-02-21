@@ -1,0 +1,16 @@
+[package]
+name = "errors_crates"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+color-eyre = "0.6.3"
+error_set = {version="0.7.0", features=["tracing"]}
+snafu = "0.8.5"
+indenter = "0.3.3"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+tracing-error = "0.2.0"
+miette = {version="7.4.0", features=["fancy"]}
+error-stack = "0.5.0"
+thiserror = "2.0.3"
