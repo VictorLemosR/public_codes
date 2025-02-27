@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub fn plus_minus(arr: &[i32]) {
     let len_arr = arr.len() as f64;
     let mut positive_numbers = 0;
@@ -170,6 +172,60 @@ pub fn read_input() {
     treat_input(input)
 }
 
-fn main() {
-    read_input();
+pub fn divisible_sum_pairs(n: i32, k: i32, ar: &[i32]) -> i32 {
+    //Time complexity: O(n+k)
+    //Space complexity (ignoring input): O(k)
+    let mut remainder_dictionary = std::collections::HashMap::new();
+    for number in ar {
+        let remainder = number % k;
+        match remainder_dictionary.get(&remainder) {
+            Some(n) => remainder_dictionary.insert(remainder, n + 1),
+            None => remainder_dictionary.insert(remainder, 1),
+        };
+    }
+
+    let mut total_pairs = 0;
+    //For remainders 0 and k/2, the total pairs will be n choose 2
+    println!(
+        "->> remainder_dictionary <<- function: divisible_sum_pairs; file: week1.rs\n{:?}",
+        remainder_dictionary
+    );
+    total_pairs += match remainder_dictionary.get(&0) {
+        Some(n) => n * (n - 1) / 2,
+        None => 0,
+    };
+    let k_is_pair = k % 2 == 0;
+    if k_is_pair {
+        total_pairs += match remainder_dictionary.get(&(k / 2)) {
+            Some(n) => n * (n - 1) / 2,
+            None => 0,
+        };
+    }
+
+    for remainder in 1..(k + 1) / 2 {
+        total_pairs += remainder_dictionary.get(&remainder).unwrap_or(&0)
+            * remainder_dictionary.get(&(k - remainder)).unwrap_or(&0);
+    }
+
+    total_pairs
+}
+
+pub fn sparse_arrays(strings: &[String], queries: &[String]) -> Vec<i32> {
+    //Time complexity: O(n+m)
+    //Space complexity (ignoring input): O(n+m)
+    let mut strings_hash_map = std::collections::HashMap::new();
+
+    for string in strings {
+        match strings_hash_map.get(&string) {
+            Some(n) => strings_hash_map.insert(string, n + 1),
+            None => strings_hash_map.insert(string, 1),
+        };
+    }
+
+    let mut strings_matched = Vec::new();
+    for query in queries {
+        strings_matched.push(*strings_hash_map.get(&query).unwrap_or(&0));
+    }
+
+    strings_matched
 }

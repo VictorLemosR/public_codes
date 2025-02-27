@@ -63,8 +63,8 @@ def breaking_the_records(scores):
 
     return records
 
-class CamelCase:
 
+class CamelCase:
     def __init__(self):
         self.read_input()
 
@@ -87,8 +87,8 @@ class CamelCase:
         while index < len(words):
             letter = words[index]
             if letter == " ":
-                combined_words += words[index+1].upper()
-                index +=1
+                combined_words += words[index + 1].upper()
+                index += 1
             else:
                 combined_words += words[index]
             index += 1
@@ -96,23 +96,23 @@ class CamelCase:
         return combined_words
 
     def read_line(self, line):
-        if line[0]=="S":
+        if line[0] == "S":
             word = self.split(line[2])
         if line[0] == "C":
             word = self.combine(line[2])
-            if line[1] =="M":
+            if line[1] == "M":
                 word += "()"
-            if line[1]=="C":
+            if line[1] == "C":
                 word = word[0].upper() + word[1:]
 
-        #Although word is possibly unbound, that is intentional to give an error
-        #and I didn't care to treat error here
+        # Although word is possibly unbound, that is intentional to give an error
+        # and I didn't care to treat error here
         print(word)
 
     def read_input(self):
         continue_loop = True
         number_of_loops = 0
-        while continue_loop & number_of_loops <1e5:
+        while continue_loop & number_of_loops < 1e5:
             try:
                 number_of_loops += 1
                 line = input()
@@ -120,3 +120,58 @@ class CamelCase:
                 self.read_line(line)
             except EOFError:
                 continue_loop = False
+
+
+def divisible_sum_pairs(n: int, k: int, ar: list[int]):
+    #Time complexity: O(n+k)
+    #Space complexity (ignoring input): O(k)
+    possible_remainders = {}
+    total_pairs = 0
+
+    for number in ar:
+        remainder = number % k
+        if remainder in possible_remainders:
+            possible_remainders[remainder] += 1
+        else:
+            possible_remainders[remainder] = 1
+
+    # For remainder 0 or k/2, the total pairs will be n choose 2
+    if 0 in possible_remainders:
+        total_pairs += int(possible_remainders[0] * (possible_remainders[0] - 1) / 2)
+    k_is_pair = k % 2 == 0
+    half_k = int(k / 2)
+    if k_is_pair and (half_k in possible_remainders):
+        total_pairs += int(
+            possible_remainders[half_k] * (possible_remainders[half_k] - 1) / 2
+        )
+
+    # For the rest of the remainders, just need to multiply
+    for remainder in range(1, int((k + 1) / 2)):
+        if (remainder in possible_remainders) and (
+            (k - remainder) in possible_remainders
+        ):
+            total_pairs += int(
+                possible_remainders[remainder] * (possible_remainders[k - remainder])
+            )
+
+    return total_pairs
+
+def sparse_arrays(strings, queries):
+    #Time complexity: O(n+m)
+    #Space complexity (ignoring input): O(n+m)
+    strings_dictionary = {}
+
+    for string in strings:
+        if string in strings_dictionary:
+            strings_dictionary[string] += 1
+        else:
+            strings_dictionary[string] = 1
+
+    strings_found = []
+    for query in queries:
+        if query in strings_dictionary:
+            strings_found.append(strings_dictionary[query])
+        else:
+            strings_found.append(0)
+
+    return strings_found
