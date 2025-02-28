@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 pub fn plus_minus(arr: &[i32]) {
     let len_arr = arr.len() as f64;
     let mut positive_numbers = 0;

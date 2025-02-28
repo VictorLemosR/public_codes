@@ -4,6 +4,8 @@ s = "oieee"
 
 
 def plus_minus(arr):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
     len_arr = len(arr)
     positive_numbers = 0
     negative_numbers = 0
@@ -19,6 +21,8 @@ def plus_minus(arr):
 
 
 def mini_max_sum(arr):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
     sum = 0
     minimum_number = arr[0]
     maximum_number = arr[0]
@@ -33,6 +37,9 @@ def mini_max_sum(arr):
 
 
 def time_conversion(s):
+    # s has a fixed length
+    # Time complexity: O(1)
+    # Space complexity (ignoring input): O(1)
     s_len = len(s)
     hour = s[0:2]
     am_pm = s[s_len - 2 :]
@@ -48,6 +55,8 @@ def time_conversion(s):
 
 
 def breaking_the_records(scores):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
     minimum = scores[0]
     maximum = scores[0]
     records = [0, 0]
@@ -65,8 +74,38 @@ def breaking_the_records(scores):
 
 
 class CamelCase:
+    # n being the length of the words
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(n)
+
     def __init__(self):
         self.read_input()
+
+    def read_input(self):
+        continue_loop = True
+        number_of_loops = 0
+        while continue_loop & number_of_loops < 1e5:
+            try:
+                number_of_loops += 1
+                line = input()
+                line = line.strip().split(";")
+                self.read_line(line)
+            except EOFError:
+                continue_loop = False
+
+    def read_line(self, line):
+        if line[0] == "S":
+            word = self.split(line[2])
+        if line[0] == "C":
+            word = self.combine(line[2])
+            if line[1] == "M":
+                word += "()"
+            if line[1] == "C":
+                word = word[0].upper() + word[1:]
+
+        # Although word is possibly unbound, that is intentional to give an error
+        # and I didn't care to treat error here
+        print(word)
 
     def split(self, word: str):
         if word.endswith("()"):
@@ -94,33 +133,6 @@ class CamelCase:
             index += 1
 
         return combined_words
-
-    def read_line(self, line):
-        if line[0] == "S":
-            word = self.split(line[2])
-        if line[0] == "C":
-            word = self.combine(line[2])
-            if line[1] == "M":
-                word += "()"
-            if line[1] == "C":
-                word = word[0].upper() + word[1:]
-
-        # Although word is possibly unbound, that is intentional to give an error
-        # and I didn't care to treat error here
-        print(word)
-
-    def read_input(self):
-        continue_loop = True
-        number_of_loops = 0
-        while continue_loop & number_of_loops < 1e5:
-            try:
-                number_of_loops += 1
-                line = input()
-                line = line.strip().split(";")
-                self.read_line(line)
-            except EOFError:
-                continue_loop = False
-
 
 def divisible_sum_pairs(n: int, k: int, ar: list[int]):
     #Time complexity: O(n+k)

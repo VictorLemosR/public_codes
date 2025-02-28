@@ -1,4 +1,5 @@
 mod week1;
+mod week2;
 
 fn main() {
     let arr = vec![3, 9, 10, 3, 2];
