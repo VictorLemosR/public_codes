@@ -31,3 +31,35 @@ def grading_students(grades):
             grades[index] = grade + 5 - grade % 5
 
     return grades
+
+
+def flipping_bits(n):
+    # Time complexity: O(1)
+    # Space complexity (ignoring input): O(1)
+    return (2**32 - 1) ^ n
+
+
+def flipping_bits_without_xor(n):
+    # Time complexity: O(1)
+    # Space complexity (ignoring input): O(1)
+    reverse_n = 0
+    for exp in range(31, -1, -1):
+        if 2**exp > n:
+            reverse_n += 2**exp
+        else:
+            n -= 2**exp
+
+    return reverse_n
+
+
+def diagonal_difference(arr):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
+    diagonal_1 = 0
+    diagonal_2 = 0
+    len_arr = len(arr)
+    for index in range(0, len_arr):
+        diagonal_1 += arr[index][index]
+        diagonal_2 += arr[len_arr - index - 1][index]
+
+    return abs(diagonal_1 - diagonal_2)
