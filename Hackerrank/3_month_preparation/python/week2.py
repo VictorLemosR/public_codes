@@ -63,3 +63,29 @@ def diagonal_difference(arr):
         diagonal_2 += arr[len_arr - index - 1][index]
 
     return abs(diagonal_1 - diagonal_2)
+
+
+def counting_sort(arr):
+    # Time complexity: O(n+k) or just O(n), since k is constant
+    # Space complexity (ignoring input): O(k) or just O(1), since k is constant
+    frequency_arr = [0] * 100
+    for number in arr:
+        frequency_arr[number] += 1
+
+    return frequency_arr
+
+
+def counting_valleys(steps, path):
+    #Time complexity: O(n)
+    #Space complexity (ignoring input): O(1)
+    height = 0
+    valleys = 0
+    for letter in path:
+        if letter == "D":
+            height -= 1
+            if height == -1:
+                valleys += 1
+        if letter == "U":
+            height += 1
+
+    return valleys

@@ -62,3 +62,34 @@ pub fn diagonal_difference(arr: &[Vec<i32>]) -> i32 {
     }
     (diagonal_1 - diagonal_2).abs()
 }
+
+pub fn counting_sort(arr: &[i32]) -> Vec<i32> {
+    //Time complexity: O(n+k) or just O(n), since k is constant
+    //Space complexity (ignoring input): O(k) or just O(1), since k is constant
+    let mut frequency_arr = vec![0; 100];
+    for &number in arr {
+        frequency_arr[number as usize] += 1;
+    }
+
+    frequency_arr
+}
+
+pub fn counting_valleys(steps: i32, path: &str) -> i32 {
+    //Time complexity: O(n)
+    //Space complexity (ignoring input): O(1)
+    let mut height = 0;
+    let mut valleys = 0;
+
+    for letter in path.chars() {
+        if letter == 'U' {
+            height += 1;
+        }
+        if letter == 'D' {
+            height -= 1;
+            if height == -1 {
+                valleys += 1
+            }
+        }
+    }
+    valleys
+}
