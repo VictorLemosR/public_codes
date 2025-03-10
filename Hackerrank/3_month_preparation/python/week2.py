@@ -76,8 +76,8 @@ def counting_sort(arr):
 
 
 def counting_valleys(steps, path):
-    #Time complexity: O(n)
-    #Space complexity (ignoring input): O(1)
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
     height = 0
     valleys = 0
     for letter in path:
@@ -89,3 +89,45 @@ def counting_valleys(steps, path):
             height += 1
 
     return valleys
+
+
+def pangrams(s: str):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
+    bit_mask = 0
+    for letter in s.lower():
+        if (letter <= "z") and (letter >= "a"):
+            bit_pos = ord(letter) - ord("a")
+            bit_mask |= 1 << bit_pos
+
+    if bit_mask == (1 << 26) - 1:
+        return "pangram"
+    return "not pangram"
+
+
+def pangrams_not_elegant(s: str):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
+    dict_letters = {}
+    for letter in s.lower():
+        if (letter <= "z") and (letter >= "a") and (letter not in dict_letters):
+            dict_letters[letter] = 1
+
+    if len(dict_letters) == 26:
+        return "pangram"
+
+    return "not pangram"
+
+
+def mars_exploration(s):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1)
+    sos_array = "SOS"
+    changed_letters = 0
+    for index in range(0, len(s)):
+        letter = s[index]
+        if letter != sos_array[index % 3]:
+            changed_letters += 1
+
+    return changed_letters
+

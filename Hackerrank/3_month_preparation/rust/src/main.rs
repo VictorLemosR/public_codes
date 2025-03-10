@@ -8,4 +8,5 @@ fn main() {
     //let a = week1::time_conversion("12:00:03PM");
     //let a = week1::breaking_the_records(&arr);
     week1::divisible_sum_pairs(5, 3, &arr);
+    week2::pangrams("asrt".to_string());
 }

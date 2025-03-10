@@ -93,3 +93,33 @@ pub fn counting_valleys(steps: i32, path: &str) -> i32 {
     }
     valleys
 }
+
+pub fn pangrams(s: &str) -> String {
+    //Time complexity: O(n)
+    //Space complexity (ignoring input): O(1)
+    let mut bit_mask = 0;
+    for letter in s.to_lowercase().chars() {
+        if ('a'..='z').contains(&letter) {
+        let bit_pos = letter as u32 - 'a' as u32;
+        bit_mask |= 1 << bit_pos;
+        };
+    }
+    if bit_mask == (1 << 26) - 1 {
+        return "pangram".to_string();
+    };
+
+    "not pangram".to_string()
+}
+
+pub fn mars_exploration(s: &str) -> i32 {
+    //Time complexity: O(n)
+    //Space complexity (ignoring input): O(1)
+    let sos_array: Vec<_> = "SOS".chars().collect();
+    let mut changed_letters = 0;
+    for (index, letter) in s.char_indices(){
+        if letter != sos_array[index%3]{
+            changed_letters += 1;
+        }
+    }
+    changed_letters
+}
