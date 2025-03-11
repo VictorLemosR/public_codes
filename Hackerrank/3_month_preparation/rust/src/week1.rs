@@ -158,16 +158,16 @@ pub fn treat_input(input: String) {
 }
 
 pub fn read_input() {
-    let mut input = String::new();
+    let mut buffer = String::new();
     loop {
-        let read_line_result = std::io::stdin().read_line(&mut input);
+        let read_line_result = std::io::stdin().read_line(&mut buffer);
         match read_line_result {
             Ok(0) => break,
             Ok(_n) => (),
             Err(error) => println!("error: {error}"),
         }
     }
-    treat_input(input)
+    treat_input(buffer)
 }
 
 pub fn divisible_sum_pairs(n: i32, k: i32, ar: &[i32]) -> i32 {
