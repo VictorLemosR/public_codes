@@ -79,3 +79,56 @@ fn sales_by_match(n: i32, ar: &[i32]) -> i32 {
     }
     total_pairs
 }
+
+fn migratory_birds(arr: &[i32]) -> i32 {
+    //Time complexity: O(n)
+    //Space complexity (ignoring input): O(1). You could use a frequency array instead
+    //of a dictionary and use even less space
+    let mut birds_hash = std::collections::HashMap::new();
+    for &bird in arr {
+        match birds_hash.get(&bird) {
+            Some(value) => birds_hash.insert(bird, value + 1),
+            None => birds_hash.insert(bird, 1),
+        };
+    }
+
+    struct BirdInfo {
+        bird: i32,
+        frequency: i32,
+    }
+    let mut most_frequent = BirdInfo {
+        bird: 6,
+        frequency: 0,
+    };
+    for (bird, frequency) in birds_hash.iter() {
+        if frequency > &most_frequent.frequency {
+            most_frequent.bird = *bird;
+            most_frequent.frequency = *frequency
+        }
+        if (frequency == &most_frequent.frequency) & (bird < &most_frequent.bird) {
+            most_frequent.bird = *bird;
+        }
+    }
+    most_frequent.bird
+}
+
+fn maximum_perimeter_triangle(sticks: &[i32]) -> Vec<i32> {
+    //Time complexity: O(n*log(n))
+    //Space complexity (ignoring input): O(n)
+    let mut sorted_sticks = sticks.to_vec();
+    sorted_sticks.sort_unstable_by(|a, b| b.cmp(a));
+    for index in 0..(sorted_sticks.len() - 2) {
+        if sorted_sticks[index] < sorted_sticks[index + 1] + sorted_sticks[index + 2] {
+            let mut triangle = vec![
+                sorted_sticks[index],
+                sorted_sticks[index + 1],
+                sorted_sticks[index + 2],
+            ];
+            triangle.sort_unstable();
+
+            return triangle;
+        }
+    }
+
+    vec![-1]
+}

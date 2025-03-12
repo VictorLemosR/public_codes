@@ -35,8 +35,8 @@ def strings_xor(s, t):
 
 
 def sales_by_match(n, ar):
-    #Time complexity: O(n)
-    #Space complexity (ignoring input): O(n)
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(n)
     socks_dict = {}
     for sock in ar:
         if sock in socks_dict:
@@ -49,3 +49,37 @@ def sales_by_match(n, ar):
         total_pairs += values // 2
 
     return total_pairs
+
+
+def migratory_birds(arr):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(1). You could use a frequency array instead
+    # of a dictionary and use even less space
+    birds_dict = {}
+    for bird in arr:
+        if bird in birds_dict:
+            birds_dict[bird] += 1
+        else:
+            birds_dict[bird] = 1
+
+    most_frequent = [6, 0]
+    for bird, frequency in birds_dict.items():
+        if frequency > most_frequent[1]:
+            most_frequent = [bird, frequency]
+        if (frequency == most_frequent[1]) and (bird < most_frequent[0]):
+            most_frequent[0] = bird
+
+    return most_frequent[0]
+
+
+def maximum_perimeter_triangle(sticks: list):
+    #Time complexity: O(n*log(n))
+    #Space complexity (ignoring input): O(1)
+    sticks.sort(reverse=True)
+    for index in range(0, len(sticks) - 2):
+        if sticks[index] < sticks[index + 1] + sticks[index + 2]:
+            triangle = [sticks[index], sticks[index + 1], sticks[index + 2]]
+            triangle.sort()
+            return triangle
+
+    return [-1]
