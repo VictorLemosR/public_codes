@@ -132,3 +132,16 @@ fn maximum_perimeter_triangle(sticks: &[i32]) -> Vec<i32> {
 
     vec![-1]
 }
+
+fn drawing_book(n: i32, p: i32) -> i32 {
+    //Time complexity: O(1)
+    //Space complexity (ignoring input): O(1)
+    let flips_front = p / 2;
+    let flips_end = n / 2 - p / 2;
+
+    if flips_front > flips_end {
+        return flips_end;
+    }
+
+    flips_front
+}

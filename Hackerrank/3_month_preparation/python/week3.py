@@ -73,8 +73,8 @@ def migratory_birds(arr):
 
 
 def maximum_perimeter_triangle(sticks: list):
-    #Time complexity: O(n*log(n))
-    #Space complexity (ignoring input): O(1)
+    # Time complexity: O(n*log(n))
+    # Space complexity (ignoring input): O(1)
     sticks.sort(reverse=True)
     for index in range(0, len(sticks) - 2):
         if sticks[index] < sticks[index + 1] + sticks[index + 2]:
@@ -83,3 +83,35 @@ def maximum_perimeter_triangle(sticks: list):
             return triangle
 
     return [-1]
+
+
+def zig_zag_sequence(a, n):
+    a.sort()
+    mid = int((n - 1) / 2)
+    a[mid], a[n - 1] = a[n - 1], a[mid]
+
+    st = mid + 1
+    ed = n - 2
+    while st <= ed:
+        a[st], a[ed] = a[ed], a[st]
+        st = st + 1
+        ed = ed - 1
+
+    for i in range(n):
+        if i == n - 1:
+            print(a[i])
+        else:
+            print(a[i], end=" ")
+    return
+
+
+def drawing_book(n, p):
+    # Time complexity: O(1)
+    # Space complexity (ignoring input): O(1)
+    flips_front = p // 2
+    flips_end = n // 2 - p // 2
+
+    if flips_front > flips_end:
+        return flips_end
+
+    return flips_front
