@@ -65,3 +65,53 @@ def left_rotation_in_place(d, arr):
         )
 
     return arr
+
+
+def number_line_jumps(x1, v1, x2, v2):
+    # Time complexity: O(1)
+    # Space complexity (ignoring input): O(1)
+    if x1 == x2:
+        return "YES"
+    if v1 == v2:
+        return "NO"
+
+    relative_speed = v2 - v1
+    initial_distance = x1 - x2
+    jumps = initial_distance / relative_speed
+
+    if jumps == abs(int(jumps)):
+        return "YES"
+
+    return "NO"
+
+
+def separate_numbers(s: str):
+    # Time complexity: O(n^2)
+    # Space complexity (ignoring input): O(n)
+    if len(s) == 1:
+        print("NO")
+        return
+
+    for len_search in range(1, (len(s)) // 2 + 1):
+        first_number = int(s[:len_search])
+
+        index = len_search
+        next_number = first_number
+        next_number_string = str(next_number)
+        next_len = len(next_number_string)
+        return_value = "YES"
+        while index + next_len <= len(s):
+            next_number = next_number + 1
+            next_number_string = str(next_number)
+            next_len = len(next_number_string)
+
+            if next_number_string != s[index : index + next_len]:
+                return_value = "NO"
+                break
+            index += next_len
+
+        if (index == len(s)) and (return_value == "YES"):
+            print(f"YES {first_number}")
+            return
+
+    print("NO")
