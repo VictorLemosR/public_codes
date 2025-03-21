@@ -115,3 +115,66 @@ def separate_numbers(s: str):
             return
 
     print("NO")
+
+
+def closest_numbers(arr):
+    # Time complexity: O(n*log(n))
+    # Space complexity (ignoring input): O(n)
+    arr.sort()
+    minimum_diff = arr[1] - arr[0]
+    pairs = [arr[0], arr[1]]
+    for index in range(2, len(arr)):
+        if (arr[index] - arr[index - 1]) == minimum_diff:
+            pairs.append(arr[index - 1])
+            pairs.append(arr[index])
+        if (arr[index] - arr[index - 1]) < minimum_diff:
+            minimum_diff = arr[index] - arr[index - 1]
+            pairs = [arr[index - 1], arr[index]]
+
+    return pairs
+
+
+def tower_breakers(n, m):
+    # Time complexity: O(1)
+    # Space complexity (ignoring input): O(1)
+    # If number of towers is pair, whatever player 1 does, player 2 mimics and wins.
+    # If n is odd, player 1 push a tower to 1 and the game becomes a n is pair case
+    if m == 1:
+        return 2
+
+    if n % 2 == 0:
+        return 2
+    else:
+        return 1
+
+
+def minimum_absolute_difference(arr):
+    # Time complexity: O(n*log(n))
+    # Space complexity (ignoring input): O(1)
+    arr.sort()
+    minimum_difference = abs(arr[0] - arr[1])
+    for index in range(2, len(arr)):
+        difference = abs(arr[index] - arr[index - 1])
+        if minimum_difference > difference:
+            minimum_difference = difference
+
+    return minimum_difference
+
+
+def caesar_cipher(s, k):
+    # Time complexity: O(n)
+    # Space complexity (ignoring input): O(n)
+    new_string = ""
+    for letter in s:
+        if (letter.lower() <= "z") and (letter.lower() >= "a"):
+            if letter == letter.lower():
+                sum_a = ord("a")
+            else:
+                sum_a = ord("A")
+            new_string += chr(
+                ((ord(letter) - sum_a + k) % (ord("z") - ord("a") + 1)) + sum_a
+            )
+        else:
+            new_string += letter
+
+    return new_string

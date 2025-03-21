@@ -116,3 +116,71 @@ pub fn separate_numbers(s: &str) {
         }
     }
 }
+
+fn closest_numbers(arr: &[i32]) -> Vec<i32> {
+    //Time complexity: O(n*log(n))
+    //Space complexity (ignoring input): O(n)
+    let mut arr = arr.to_vec();
+    arr.sort_unstable();
+
+    let mut minimun_value = arr[1] - arr[0];
+    let mut pairs = vec![arr[0], arr[1]];
+    for index in 2..arr.len() {
+        if (arr[index] - arr[index - 1]) == minimun_value {
+            pairs.push(arr[index - 1]);
+            pairs.push(arr[index]);
+        }
+        if (arr[index] - arr[index - 1]) < minimun_value {
+            minimun_value = arr[index] - arr[index - 1];
+            pairs = vec![arr[index - 1], arr[index]];
+        }
+    }
+    pairs
+}
+
+fn tower_breakes(n: i32, m: i32) -> i32 {
+    //Time complexity: O(1)
+    //Space complexity (ignoring input): O(1)
+    //If number of towers is pair, whatever player 1 does, player 2 mimics and wins.
+    //If n is odd, player 1 push a tower to 1 and the game becomes a n is pair case
+    if m == 1 {
+        return 2;
+    }
+
+    if n % 2 == 0 {
+        2
+    } else {
+        1
+    }
+}
+
+fn minimum_absolute_difference(arr: &[i32]) -> i32 {
+    //Time complexity: O(n*log(n))
+    //Space complexity (ignoring input): O(n)
+    let mut arr = arr.to_vec();
+    arr.sort_unstable();
+    let mut minimum_difference = (arr[0] - arr[1]).abs();
+    for index in 2..arr.len() {
+        let difference = (arr[index] - arr[index - 1]).abs();
+        if minimum_difference > difference {
+            minimum_difference = difference;
+        };
+    }
+    minimum_difference
+}
+
+fn caesar_cipher(s: &str, k: i32) -> String {
+    //Time complexity: O(n)
+    //Space complexity (ignoring input): O(n)
+    let mut new_string = String::with_capacity(s.len());
+    let k = k as u8;
+    for letter in s.chars() {
+        if letter.is_alphabetic() {
+            let sum_a = if letter.is_uppercase() { b'A' } else { b'a' };
+            new_string.push(((letter as u8 - sum_a + k) % (b'z' - b'a' + 1) + sum_a) as char);
+        } else {
+            new_string.push(letter);
+        }
+    }
+    new_string
+}
