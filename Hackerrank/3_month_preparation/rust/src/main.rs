@@ -13,5 +13,6 @@ fn main() {
     //let a = week1::breaking_the_records(&arr);
     //week1::divisible_sum_pairs(5, 3, &arr);
     //week2::pangrams("asrt");
-    week4::separate_numbers("910");
+    //week4::separate_numbers("910");
+    week6::build_magic_squares();
 }
